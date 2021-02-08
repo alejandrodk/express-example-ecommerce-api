@@ -3,12 +3,20 @@ const path = require("path");
 const bodyParser = require("body-parser");
 const productsApiRouter = require("./routes/api/products.routes");
 const productsRouter = require("./routes/views/product");
+
+const {
+  errorHandler,
+  logErrors,
+  clientErrorHanlder,
+} = require("./utils/middlewares/errorHandler");
+
 // app
 const app = express();
 
 // middlewares
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json())
+app.use(bodyParser.json());
+
 // static files
 app.use("/static", express.static(path.join(__dirname, "public")));
 
@@ -20,7 +28,12 @@ app.set("view engine", "pug");
 app.use("/products", productsRouter);
 app.use("/api/products", productsApiRouter);
 
-app.get('/', (req, res, next) => res.redirect('/products'));
+app.get("/", (req, res, next) => res.redirect("/products"));
+
+// Error handlers
+app.use(logErrors);
+app.use(clientErrorHanlder);
+app.use(errorHandler);
 
 // server
 const server = app.listen(8000, function () {
