@@ -1,10 +1,14 @@
 const express = require("express");
 const path = require("path");
-const productsApiRouter = require('./routes/api/products.routes');
+const bodyParser = require("body-parser");
+const productsApiRouter = require("./routes/api/products.routes");
 
 // app
 const app = express();
 
+// middlewares
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json())
 // static files
 app.use("/static", express.static(path.join(__dirname, "public")));
 
@@ -17,7 +21,7 @@ app.use("/api/products", productsApiRouter);
 
 //app.get('/', (req, res, next) => res.redirect('/products'));
 
-// server 
-const server = app.listen(8000, function() {
+// server
+const server = app.listen(8000, function () {
   console.log(`Listening http://localhost:${server.address().port}`);
 });
