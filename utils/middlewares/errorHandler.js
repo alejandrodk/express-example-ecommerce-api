@@ -1,6 +1,14 @@
+const Sentry = require("@sentry/node");
 const { config } = require("../../config");
 
+Sentry.init({
+  dsn: config.sentryDns,
+  environment: config.env
+});
+
 function logErrors(err, req, res, next) {
+  const errorId = Sentry.captureException(err);
+  console.log(errorId)
   console.log(err.stack);
   next(err);
 }
