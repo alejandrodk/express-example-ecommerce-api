@@ -15,19 +15,19 @@ class ProductService {
   }
 
   async getProduct({ productId }) {
-    return Promise.resolve(productsMocks[0]);
+    return await this.mongodb.getOne(this.collection, productId);
   }
 
   async createProduct({ product }) {
-    return Promise.resolve(productsMocks);
+    return await this.mongodb.createOne(this.collection, product);
   }
 
   async updateProduct({ productId, product }) {
-    return Promise.resolve(productsMocks[0]);
+    return await this.mongodb.updateOne(this.collection, productId, product);
   }
 
   async deleteProduct({ productId }) {
-    return Promise.resolve();
+    return await this.mongodb.deleteOne(this.collection, productId);
   }
 }
 
