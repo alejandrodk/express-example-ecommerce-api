@@ -49,8 +49,8 @@ function productsApi(app) {
 
   router.post(
     "/",
-    passport.authenticate("jwt", { session: false }),
-    validation(createProductSchema),
+    //passport.authenticate("jwt", { session: false }),
+    //validation(createProductSchema),
     async function (req, res) {
       try {
         const product = req.body;
@@ -69,9 +69,9 @@ function productsApi(app) {
 
   router.put(
     "/:productId",
-    passport.authenticate("jwt", { session: false }),
-    validation({ productId: productIdSchema }, "params"),
-    validation(updateProductSchema, "body"),
+    //passport.authenticate("jwt", { session: false }),
+    //validation({ productId: productIdSchema }, "params"),
+    //validation(updateProductSchema, "body"),
     async function (req, res) {
       try {
         const { productId } = req.params;
@@ -94,9 +94,9 @@ function productsApi(app) {
 
   router.patch(
     "/:productId",
-    passport.authenticate("jwt", { session: false }),
-    validation({ productId: productIdSchema }, "params"),
-    validation(updateProductSchema, "body"),
+    //passport.authenticate("jwt", { session: false }),
+    //validation({ productId: productIdSchema }, "params"),
+    //validation(updateProductSchema, "body"),
     async function (req, res) {
       try {
         const { productId } = req.params;
@@ -119,7 +119,7 @@ function productsApi(app) {
 
   router.delete(
     "/:productId",
-    passport.authenticate("jwt", { session: false }),
+    //passport.authenticate("jwt", { session: false }),
     async function (req, res) {
       try {
         const { productId } = req.params;
