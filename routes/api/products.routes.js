@@ -1,8 +1,15 @@
 const express = require("express");
 const router = express.Router();
 const ProductService = require("../../services/product.service");
+const validation = require("../../utils/middlewares/validationHandler");
 
 const productService = new ProductService();
+const {
+  productIdSchema,
+  createProductSchema,
+  updateProductSchema,
+  productTagSchema,
+} = require("../../utils/schemas/product.schema");
 
 router.get("/", async function (req, res) {
   try {
@@ -34,7 +41,7 @@ router.get("/:productId", async function (req, res) {
   }
 });
 
-router.post("/", async function (req, res) {
+router.post("/", validation(createProductSchema), async function (req, res) {
   try {
     const product = req.body;
 
@@ -49,37 +56,53 @@ router.post("/", async function (req, res) {
   }
 });
 
-router.put("/:productId", async function (req, res) {
-  try {
-    const { productId } = req.params;
-    const product = req.body;
+router.put(
+  "/:productId",
+  validation({ productId: productIdSchema }, "params"),
+  validation(updateProductSchema, "body"),
+  async function (req, res) {
+    try {
+      const { productId } = req.params;
+      const product = req.body;
 
-    const producto = await productService.updateProduct({ productId, product });
+      const producto = await productService.updateProduct({
+        productId,
+        product,
+      });
 
-    res.status(200).json({
-      data: producto,
-      message: "products updated",
-    });
-  } catch (error) {
-    console.error(error);
+      res.status(200).json({
+        data: producto,
+        message: "products updated",
+      });
+    } catch (error) {
+      console.error(error);
+    }
   }
-});
+);
 
-router.patch("/:productId", async function (req, res) {
-  try {
-    const { productId } = req.params;
-    const product = req.body;
+router.patch(
+  "/:productId",
+  validation({ productId: productIdSchema }, "params"),
+  validation(updateProductSchema, "body"),
+  async function (req, res) {
+    try {
+      const { productId } = req.params;
+      const product = req.body;
 
-    const producto = await productService.updateProduct({ productId, product });
+      const producto = await productService.updateProduct({
+        productId,
+        product,
+      });
 
-    res.status(200).json({
-      data: producto,
-      message: "products updated",
-    });
-  } catch (error) {
-    console.error(error);
+      res.status(200).json({
+        data: producto,
+        message: "products updated",
+      });
+    } catch (error) {
+      console.error(error);
+    }
   }
-});
+);
 
 router.delete("/:productId", async function (req, res) {
   try {
