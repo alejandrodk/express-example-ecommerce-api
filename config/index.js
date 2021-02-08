@@ -11,7 +11,11 @@ const config = {
   dbName: process.env.DB_NAME,
   dbUri: process.env.DB_URI,
   sentryDns: process.env.SENTRY_DNS,
-  sentryId: process.env.SENTRY_ID
+  sentryId: process.env.SENTRY_ID,
+  authUser: process.env.AUTH_ADMIN_USER,
+  authPass: process.env.AUTH_ADMIN_PASS,
+  authEmail: process.env.AUTH_ADMIN_EMAL,
+  authJwtSecret: process.env.AUTH_JWT_SECRET
 };
 
 module.exports = { config };
