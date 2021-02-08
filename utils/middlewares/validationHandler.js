@@ -1,4 +1,5 @@
 const Joi = require("joi");
+const boom = require('boom');
 
 function validate(data, schema) {
   const { error } = Joi.object(schema).validate(data);
@@ -8,7 +9,7 @@ function validate(data, schema) {
 function validationHandler(schema, check = "body") {
   return function (req, res, next) {
     const error = validate(req[check], schema);
-    error && next(new Error(error));
+    error && next(boom.badRequest(error));
 
     next();
   };

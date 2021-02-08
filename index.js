@@ -7,6 +7,7 @@ const productsRouter = require("./routes/views/product");
 const {
   errorHandler,
   logErrors,
+  wrapErrors,
   clientErrorHanlder,
 } = require("./utils/middlewares/errorHandler");
 
@@ -36,6 +37,7 @@ app.use(function(req, res, next) {
 
 // Error handlers
 app.use(logErrors);
+app.use(wrapErrors);
 app.use(clientErrorHanlder);
 app.use(errorHandler);
 
