@@ -30,6 +30,10 @@ app.use("/api/products", productsApiRouter);
 
 app.get("/", (req, res, next) => res.redirect("/products"));
 
+app.use(function(req, res, next) {
+  res.status(404).render("404")
+})
+
 // Error handlers
 app.use(logErrors);
 app.use(clientErrorHanlder);
