@@ -51,3 +51,25 @@ npm test
 | DELETE | /api/products/:id | Remove product
 | POST | /token | Get auth token
 
+## ENV
+```sh
+# Node
+NODE_ENV=
+PORT=
+# Mongo
+DB_USER=
+DB_PASSWORD=
+DB_HOST=
+DB_PORT=
+DB_NAME=
+DB_URI=
+# Sentry
+SENTRY_DNS=
+SENTRY_ID=
+# Admin user
+AUTH_ADMIN_USER=
+AUTH_ADMIN_PASS=
+AUTH_ADMIN_EMAL=
+# JWT
+AUTH_JWT_SECRET=
+```
